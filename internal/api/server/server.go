@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	_ "github.com/8soat-grupo35/fastfood-order-production/docs"
+	"github.com/8soat-grupo35/fastfood-order-production/internal/api/handlers"
 	"github.com/8soat-grupo35/fastfood-order-production/internal/external"
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -39,6 +40,11 @@ func newApp(cfg external.Config) *echo.Echo {
 	app.GET("/", func(echo echo.Context) error {
 		return echo.JSON(http.StatusOK, "Alive")
 	})
+
+	paymentHandler := handlers.NewPaymentHandler(external.DB)
+	paymentGroup := app.Group("/v1/payments")
+	paymentGroup.GET("/:orderID/payment/status", paymentHandler.GetPaymentStatus)
+	paymentGroup.PUT("/:orderID/payment/status", paymentHandler.UpdatePaymentStatus)
 
 	return app
 }

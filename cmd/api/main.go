@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Iniciado o servidor Rest com GO")
+	fmt.Println("Starting Payment Microservice")
 	cfg := external.GetConfig()
 	server.Start(cfg)
 }
