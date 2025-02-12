@@ -67,3 +67,4 @@ func initDefaults(config *viper.Viper) {
 	config.SetDefault("database.password", "root")
 	config.SetDefault("database.dbname", "root")
 }
+

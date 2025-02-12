@@ -1,4 +1,57 @@
 info:
   contact: {}
-paths: {}
+paths:
+  /v1/payments/{orderID}/payment/status:
+    get:
+      consumes:
+      - application/json
+      description: Get Order Payment Status
+      parameters:
+      - description: ID do pedido
+        in: path
+        name: orderID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Get Order Payment Status
+      tags:
+      - Orders
+    put:
+      consumes:
+      - application/json
+      description: Atualiza o status de pagamento de um pedido
+      parameters:
+      - description: ID do pedidoxxx
+        in: path
+        name: orderID
+        required: true
+        type: integer
+      - description: Status do pagamento
+        in: body
+        name: status
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Update Order Payment Status
+      tags:
+      - Orders
 swagger: "2.0"

@@ -6,6 +6,9 @@ CREATE TABLE IF NOT EXISTS payments (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO payments (order_id, status)  VALUES (1, 'AGUARDANDO');
-INSERT INTO payments (order_id, status)  VALUES (2, 'RECUSADO');
-INSERT INTO payments (order_id, status)  VALUES (3, 'APROVADO');
+
+INSERT INTO payments (order_id, status, created_at, updated_at)
+VALUES 
+    (123, 'AGUARDANDO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (124, 'RECUSADO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (125, 'APROVADO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

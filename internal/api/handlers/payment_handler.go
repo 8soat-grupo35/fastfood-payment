@@ -25,12 +25,12 @@ func NewPaymentHandler(db *gorm.DB) *PaymentHandler {
 // @Tags         Orders
 // @Accept       json
 // @Produce      json
-// @Param		 orderID             path int         true "ID do pedido"
-// @Router       /v1/orders/{orderID}/payment/status [get]
-// @success 200 {object} presenters.OrderPaymentStatusPresenter
-// @Failure 500 {object} error
+// @Param        orderID  path  int  true  "ID do pedido"
+// @Router       /v1/payments/{orderID}/payment/status [get]
+// @Success      200  {object}  string
+// @Failure      500  {object}  error
 func (h *PaymentHandler) GetPaymentStatus(c echo.Context) error {
-	orderID, err := strconv.Atoi(c.Param("id"))
+	orderID, err := strconv.Atoi(c.Param("orderID"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "Invalid order ID")
 	}
@@ -43,19 +43,19 @@ func (h *PaymentHandler) GetPaymentStatus(c echo.Context) error {
 	return c.JSON(http.StatusOK, status)
 }
 
-// UpdateOrderPaymentStatus godoc
+// UpdatePaymentStatus godoc
 // @Summary      Update Order Payment Status
-// @Description  Update Order Payment Status
+// @Description  Atualiza o status de pagamento de um pedido
 // @Tags         Orders
 // @Accept       json
 // @Produce      json
-// @Param		 orderID             path int         true "ID do pedido"
-// @Param        UpdateBody	body dto.OrderPaymentStatusDto true "UpdateBody"
-// @Router       /v1/orders/{orderID}/payment/status [put]
-// @success 200 {object} string
-// @Failure 500 {object} error
+// @Param        orderID  path  int  true  "ID do pedido"
+// @Param        status   body  string  true  "Status do pagamento"
+// @Router       /v1/payments/{orderID}/payment/status [put]
+// @Success      200  {object}  string
+// @Failure      500  {object}  error
 func (h *PaymentHandler) UpdatePaymentStatus(c echo.Context) error {
-	orderID, err := strconv.Atoi(c.Param("id"))
+	orderID, err := strconv.Atoi(c.Param("orderID"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "Invalid order ID")
 	}
