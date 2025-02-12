@@ -19,6 +19,16 @@ func NewPaymentHandler(db *gorm.DB) *PaymentHandler {
 	}
 }
 
+// GetOrderPaymentStatus godoc
+// @Summary      Get Order Payment Status
+// @Description  Get Order Payment Status
+// @Tags         Orders
+// @Accept       json
+// @Produce      json
+// @Param		 orderID             path int         true "ID do pedido"
+// @Router       /v1/orders/{orderID}/payment/status [get]
+// @success 200 {object} presenters.OrderPaymentStatusPresenter
+// @Failure 500 {object} error
 func (h *PaymentHandler) GetPaymentStatus(c echo.Context) error {
 	orderID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -33,6 +43,17 @@ func (h *PaymentHandler) GetPaymentStatus(c echo.Context) error {
 	return c.JSON(http.StatusOK, status)
 }
 
+// UpdateOrderPaymentStatus godoc
+// @Summary      Update Order Payment Status
+// @Description  Update Order Payment Status
+// @Tags         Orders
+// @Accept       json
+// @Produce      json
+// @Param		 orderID             path int         true "ID do pedido"
+// @Param        UpdateBody	body dto.OrderPaymentStatusDto true "UpdateBody"
+// @Router       /v1/orders/{orderID}/payment/status [put]
+// @success 200 {object} string
+// @Failure 500 {object} error
 func (h *PaymentHandler) UpdatePaymentStatus(c echo.Context) error {
 	orderID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
