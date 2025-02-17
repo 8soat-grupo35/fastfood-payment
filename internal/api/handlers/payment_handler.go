@@ -74,3 +74,30 @@ func (h *PaymentHandler) UpdatePaymentStatus(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, "Payment status updated")
 }
+
+// CreatePayment godoc
+// @Summary      Create Payment
+// @Description  Create payment form order
+// @Tags         Orders
+// @Accept       json
+// @Produce      json
+// @Param        orderId   body  string  true  "Id do pedido"
+// @Router       /v1/payments [post]
+// @Success      200  {object}  int
+// @Failure      500  {object}  error
+func (h *PaymentHandler) CreatePayment(c echo.Context) error {
+	var request struct {
+		OrderID uint32 `json:"orderId"`
+	}
+
+	if err := c.Bind(&request); err != nil {
+		return c.JSON(http.StatusBadRequest, "Invalid request body")
+	}
+
+	payment, err := h.paymentUsecase.Create(request.OrderID)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, payment)
+}

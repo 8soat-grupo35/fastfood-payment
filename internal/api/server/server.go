@@ -45,6 +45,7 @@ func newApp(cfg external.Config) *echo.Echo {
 	paymentGroup := app.Group("/v1/payments")
 	paymentGroup.GET("/:orderID/payment/status", paymentHandler.GetPaymentStatus)
 	paymentGroup.PUT("/:orderID/payment/status", paymentHandler.UpdatePaymentStatus)
+	paymentGroup.POST("/", paymentHandler.CreatePayment)
 
 	return app
 }
