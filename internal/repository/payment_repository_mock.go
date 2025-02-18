@@ -22,5 +22,8 @@ func (m *MockPaymentRepository) UpdatePaymentStatus(orderID uint32, status strin
 
 func (m *MockPaymentRepository) Create(payment entities.Payment) (*entities.Payment, error) {
 	args := m.Called(payment)
-	return args.Get(0).(*entities.Payment), args.Error(1)
+	if args.Get(0) != nil {
+		return args.Get(0).(*entities.Payment), args.Error(1)
+	}
+	return nil, args.Error(1)
 }

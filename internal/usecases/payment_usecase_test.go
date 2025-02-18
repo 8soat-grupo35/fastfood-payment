@@ -1,14 +1,15 @@
 package usecase
 
 import (
-    "errors"
-    "testing"
+	"errors"
+	"testing"
 
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/suite"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/suite"
 
-    "github.com/8soat-grupo35/fastfood-payment/internal/entities"
-    "github.com/8soat-grupo35/fastfood-payment/internal/repository"
+	"github.com/8soat-grupo35/fastfood-payment/internal/entities"
+	"github.com/8soat-grupo35/fastfood-payment/internal/repository"
 )
 
 type PaymentUsecaseSuite struct {
@@ -67,6 +68,30 @@ func (suite *PaymentUsecaseSuite) TestUpdatePaymentStatus_Error() {
 
     err := suite.usecase.UpdatePaymentStatus(suite.payment.ID, "FAILED")
     assert.Error(suite.T(), err)
+}
+
+func (suite *PaymentUsecaseSuite) TestCreate_Success() {
+    expectedPayment := &entities.Payment{
+        ID:      1,
+        OrderID: 123,
+        Status:  entities.PAYMENT_STATUS_WAITING,
+    }
+    
+    suite.mockRepo.On("Create", mock.Anything).Return(expectedPayment, nil)
+
+    payment, err := suite.usecase.Create(123)
+    assert.NoError(suite.T(), err)
+    assert.NotNil(suite.T(), payment)
+    assert.Equal(suite.T(), expectedPayment.OrderID, payment.OrderID)
+    assert.Equal(suite.T(), expectedPayment.Status, payment.Status)
+}
+
+func (suite *PaymentUsecaseSuite) TestCreate_Error() {
+    suite.mockRepo.On("Create", mock.Anything).Return(nil, errors.New("failed to create payment"))
+
+    payment, err := suite.usecase.Create(123)
+    assert.Error(suite.T(), err)
+    assert.Nil(suite.T(), payment)
 }
 
 func (suite *PaymentUsecaseSuite) TestNewPaymentUsecase() {
