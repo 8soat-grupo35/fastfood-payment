@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
           - secretRef:
-              name: database-secret          
+              name: database-payment-secret          
           ports:
             - containerPort: 8000
           livenessProbe:
