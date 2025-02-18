@@ -52,7 +52,7 @@ jobs:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         run: |
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region ${{ secrets.AWS_REGION_DEFAULT }}
-          kubectl create secret generic aws-secrets \
+          kubectl apply secret generic aws-secrets \
             --from-literal=access-key-id=${{ secrets.AWS_ACCESS_KEY_ID }} \
             --from-literal=secret-access-key=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
             --from-literal=access-session-token=${{ secrets.AWS_SESSION_TOKEN }}
