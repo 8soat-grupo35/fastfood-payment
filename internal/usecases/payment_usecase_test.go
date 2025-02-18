@@ -69,6 +69,11 @@ func (suite *PaymentUsecaseSuite) TestUpdatePaymentStatus_Error() {
     assert.Error(suite.T(), err)
 }
 
+func (suite *PaymentUsecaseSuite) TestNewPaymentUsecase() {
+    usecase := NewPaymentUsecase(nil)
+    assert.NotNil(suite.T(), usecase)
+}
+
 // Função para rodar a test suite
 func TestPaymentUsecaseSuite(t *testing.T) {
     suite.Run(t, new(PaymentUsecaseSuite))
