@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-dbinit
+data:
+  docker-database-initial.sql: 
+    CREATE TABLE IF NOT EXISTS payments (
+        id SERIAL PRIMARY KEY,
+        order_id INT NOT NULL,
+        status VARCHAR(50) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    INSERT INTO payments (order_id, status, created_at, updated_at) VALUES 
+    (123, 'AGUARDANDO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (124, 'RECUSADO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (125, 'APROVADO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
