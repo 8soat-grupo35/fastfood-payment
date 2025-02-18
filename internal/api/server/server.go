@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	_ "github.com/8soat-grupo35/fastfood-order-production/docs"
-	"github.com/8soat-grupo35/fastfood-order-production/internal/api/handlers"
-	"github.com/8soat-grupo35/fastfood-order-production/internal/external"
+	_ "github.com/8soat-grupo35/fastfood-payment/docs"
+	"github.com/8soat-grupo35/fastfood-payment/internal/api/handlers"
+	"github.com/8soat-grupo35/fastfood-payment/internal/external"
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )

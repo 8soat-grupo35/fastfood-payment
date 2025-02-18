@@ -19,6 +19,9 @@ spec:
         - name: fastfood-payment-app
           image: fastfood-payment-app:latest
           imagePullPolicy: IfNotPresent
+          envFrom:
+          - secretRef:
+              name: database-secret          
           ports:
             - containerPort: 8000
           livenessProbe:

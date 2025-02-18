@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	usecase "github.com/8soat-grupo35/fastfood-order-production/internal/usecases"
+	usecase "github.com/8soat-grupo35/fastfood-payment/internal/usecases"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )

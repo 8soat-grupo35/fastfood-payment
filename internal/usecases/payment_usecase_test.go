@@ -7,8 +7,8 @@ import (
     "github.com/stretchr/testify/assert"
     "github.com/stretchr/testify/suite"
 
-    "github.com/8soat-grupo35/fastfood-order-production/internal/entities"
-    "github.com/8soat-grupo35/fastfood-order-production/internal/repository"
+    "github.com/8soat-grupo35/fastfood-payment/internal/entities"
+    "github.com/8soat-grupo35/fastfood-payment/internal/repository"
 )
 
 type PaymentUsecaseSuite struct {

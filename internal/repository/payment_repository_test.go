@@ -12,7 +12,7 @@ import (
     "gorm.io/driver/postgres"
     "gorm.io/gorm"
 
-    "github.com/8soat-grupo35/fastfood-order-production/internal/entities"
+    "github.com/8soat-grupo35/fastfood-payment/internal/entities"
 )
 
 type PaymentRepositorySuite struct {

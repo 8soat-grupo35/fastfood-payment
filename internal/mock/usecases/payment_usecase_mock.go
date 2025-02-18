@@ -1,7 +1,7 @@
 package mock
 
 import (
-	"github.com/8soat-grupo35/fastfood-order-production/internal/entities"
+	"github.com/8soat-grupo35/fastfood-payment/internal/entities"
 	"github.com/stretchr/testify/mock"
 )
 

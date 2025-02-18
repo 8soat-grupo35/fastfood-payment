@@ -7,7 +7,7 @@ import (
     "net/http/httptest"
 	"testing"
 
-	mock "github.com/8soat-grupo35/fastfood-order-production/internal/mock/usecases"
+	mock "github.com/8soat-grupo35/fastfood-payment/internal/mock/usecases"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
