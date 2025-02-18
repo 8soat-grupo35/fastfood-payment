@@ -52,6 +52,7 @@ jobs:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         run: |
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region ${{ secrets.AWS_REGION_DEFAULT }}
+          kubectl apply -f kubernetes/fastfood-payment-secrets.yaml
           envsubst < kubernetes/fastfood-payment-deployment.yaml | kubectl apply -f -
           kubectl apply -f kubernetes/fastfood-payment-service.yaml
           kubectl apply -f kubernetes/fastfood-payment-hpa.yaml
