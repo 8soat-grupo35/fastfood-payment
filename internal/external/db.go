@@ -2,7 +2,6 @@ package external
 
 import (
 	"fmt"
-	"log"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -19,7 +18,8 @@ func ConectaDB(host, user, password, dbname, port string) {
 	db, err := gorm.Open(postgres.Open(conexao))
 
 	if err != nil {
-		log.Panic("Erro na conexao com banco de dados")
+		// log.Panic("Erro na conexao com banco de dados")
+		fmt.Println("Erro na conexao com banco de dados")
 	}
 
 	DB = db

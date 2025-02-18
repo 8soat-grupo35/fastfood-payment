@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastfood-app
+  name: fastfood-payment-app
   labels:
-    app: fastfood-app
+    app: fastfood-payment-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastfood-app
+      app: fastfood-payment-app
   template:
     metadata:
-      name: fastfood-app
+      name: fastfood-payment-app
       labels:
-        app: fastfood-app
+        app: fastfood-payment-app
     spec:
       containers:
-        - name: fastfood-app
-          image: fastfood-app
-          imagePullPolicy: Never
+        - name: fastfood-payment-app
+          image: fastfood-payment-app:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           livenessProbe:

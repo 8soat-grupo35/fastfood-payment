@@ -15,6 +15,44 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/v1/payments": {
+            "post": {
+                "description": "Create payment form order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create Payment",
+                "parameters": [
+                    {
+                        "description": "Id do pedido",
+                        "name": "orderId",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {}
+                    }
+                }
+            }
+        },
         "/v1/payments/{orderID}/payment/status": {
             "get": {
                 "description": "Get Order Payment Status",
@@ -65,7 +103,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "ID do pedidoxxx",
+                        "description": "ID do pedido",
                         "name": "orderID",
                         "in": "path",
                         "required": true

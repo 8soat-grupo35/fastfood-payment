@@ -1,6 +1,31 @@
 info:
   contact: {}
 paths:
+  /v1/payments:
+    post:
+      consumes:
+      - application/json
+      description: Create payment form order
+      parameters:
+      - description: Id do pedido
+        in: body
+        name: orderId
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Create Payment
+      tags:
+      - Orders
   /v1/payments/{orderID}/payment/status:
     get:
       consumes:
@@ -30,7 +55,7 @@ paths:
       - application/json
       description: Atualiza o status de pagamento de um pedido
       parameters:
-      - description: ID do pedidoxxx
+      - description: ID do pedido
         in: path
         name: orderID
         required: true
