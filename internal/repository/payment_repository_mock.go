@@ -11,8 +11,8 @@ type MockPaymentRepository struct {
 }
 
 func (m *MockPaymentRepository) GetPaymentStatus(orderID uint32) (string, error) {
-	args := m.Called(orderID)
-	return args.String(0), args.Error(1)
+    args := m.Called(orderID)
+    return args.String(0), args.Error(1)
 }
 
 func (m *MockPaymentRepository) UpdatePaymentStatus(orderID uint32, status string) error {
@@ -22,5 +22,8 @@ func (m *MockPaymentRepository) UpdatePaymentStatus(orderID uint32, status strin
 
 func (m *MockPaymentRepository) Create(payment entities.Payment) (*entities.Payment, error) {
 	args := m.Called(payment)
-	return args.Get(0).(*entities.Payment), args.Error(1)
+	if args.Get(0) != nil {
+		return args.Get(0).(*entities.Payment), args.Error(1)
+	}
+	return nil, args.Error(1)
 }

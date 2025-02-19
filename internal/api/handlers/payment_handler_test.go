@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/8soat-grupo35/fastfood-payment/internal/entities"
 	mock "github.com/8soat-grupo35/fastfood-payment/internal/mock/usecases"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
@@ -102,6 +103,39 @@ func (suite *PaymentHandlerSuite) TestUpdatePaymentStatus_Error() {
 	assert.NoError(suite.T(), err)
 	assert.Equal(suite.T(), http.StatusInternalServerError, rec.Code)
 	assert.Equal(suite.T(), "\"update error\"\n", rec.Body.String())
+}
+
+func (suite *PaymentHandlerSuite) TestCreatePayment_Success() {
+	body := `{"orderId": 123}`
+	req := httptest.NewRequest(http.MethodPost, "/v1/payments", bytes.NewBufferString(body))
+	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+	rec := httptest.NewRecorder()
+	c := suite.echo.NewContext(req, rec)
+
+	mockPayment := &entities.Payment{
+		ID:      1,
+		OrderID: 123,
+		Status:  "WAITING",
+	}
+
+	suite.mockUsecase.On("Create", uint32(123)).Return(mockPayment, nil)
+
+	err := suite.handler.CreatePayment(c)
+	assert.NoError(suite.T(), err)
+	assert.Equal(suite.T(), http.StatusOK, rec.Code)
+}
+
+func (suite *PaymentHandlerSuite) TestCreatePayment_BindError() {
+	body := `{"orderId": "invalid"}` // OrderID inválido
+	req := httptest.NewRequest(http.MethodPost, "/v1/payments", bytes.NewBufferString(body))
+	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+	rec := httptest.NewRecorder()
+	c := suite.echo.NewContext(req, rec)
+
+	err := suite.handler.CreatePayment(c)
+	assert.NoError(suite.T(), err)
+	assert.Equal(suite.T(), http.StatusBadRequest, rec.Code)
+	assert.Equal(suite.T(), "\"Invalid request body\"\n", rec.Body.String())
 }
 
 func (suite *PaymentHandlerSuite) TestNewPaymentHandler() {
